@@ -618,9 +618,17 @@ class Factory
 
         // get traits from ancestor traits
         foreach(array_keys($traits) as $trait) {
-            foreach (class_uses($trait) as $key => $name) {
-                $traits[$key] = $name;
-            }
+            $traits = $this->addTraitsForEntity($traits, $trait);
+        }
+
+        return $traits;
+    }
+
+    private function addTraitsForEntity(&$traits, $entity)
+    {
+        foreach (class_uses($entity) as $key => $name) {
+            $traits[$key] = $name;
+            $this->addTraitsForEntity($traits, $key);
         }
 
         return $traits;
