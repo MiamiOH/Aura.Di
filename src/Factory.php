@@ -624,6 +624,11 @@ class Factory
         return $traits;
     }
 
+    /**
+     * @param $traits
+     * @param $entity
+     * @return mixed
+     */
     private function addTraitsForEntity(&$traits, $entity)
     {
         foreach (class_uses($entity) as $key => $name) {
